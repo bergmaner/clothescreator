@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import TShirt from "../components/TShirt";
+import Cloth from "../components/Cloth";
 import Layout from "../components/layout";
 import ColorPicker from "../components/ColorPicker";
 
@@ -11,6 +11,7 @@ const IndexPage = () => {
     { text: "prawy", onClick: () => setImage("right.png") },
   ]
   const [image, setImage] = useState("front.png");
+  const [type, setType] = useState("tshirt");
   const [color, setColor] = useState({
     r: "0",
     g: "0",
@@ -20,13 +21,19 @@ const IndexPage = () => {
   const changeColor = col => {
     setColor(col.rgb)
   }
+  console.log(type);
   return (
     <Layout>
       {buttonsConfig.map(item => (
         <button onClick={item.onClick}>{item.text}</button>
       ))}
-      <ColorPicker color={color} changeColor={changeColor} />
-      <TShirt color={color} image={image} />
+       <select name="type" value={type} onChange={ (e) => setType(e.target.value) }>
+    <option value="tshirt">Koszulka</option>
+    <option value="hoodie">Bluza</option>
+    <option value="sweatshirt">Sweter</option>
+  </select>
+      <ColorPicker color={color} changeColor={changeColor}/>
+      <Cloth color={color} image={image} type={type} />
     </Layout>
   )
 }
