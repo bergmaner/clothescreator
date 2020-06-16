@@ -5,6 +5,7 @@
   "version": "0.1.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
+    "@reach/rect": "^0.10.4",
     "babel-plugin-styled-components": "^1.10.7",
     "gatsby": "^2.22.15",
     "gatsby-image": "^2.4.5",

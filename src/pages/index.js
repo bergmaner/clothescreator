@@ -31,12 +31,8 @@ const IndexPage = () => {
         <option value="hoodie">Bluza</option>
         <option value="sweatshirt">Sweter</option>
       </select>
+      <Draggable > <div>tekst</div></Draggable>
       <ColorPicker color={color} changeColor={changeColor} />
-     <Draggable> <div>
-        tekst
-      </div>
-      </Draggable>
-
       <Cloth color={color} image={image} type={type} />
     </Layout>
   )
