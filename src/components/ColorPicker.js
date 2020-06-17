@@ -7,11 +7,11 @@ const Pallete = styled.div`
   z-index: 100;
 `
 
-const ColorPicker = ({ color, changeColor }) => {
+const ColorPicker = ({ color, changeColor,text }) => {
   const [open, setOpen] = useState(false)
   return (
     <div>
-      <button onClick={() => setOpen(true)}>color</button>
+      <button onClick={() => setOpen(true)}>{text}</button>
       {open && (
         <Pallete onMouseLeave={() => setOpen(false)}>
           <ChromePicker color={color} onChange={changeColor} />

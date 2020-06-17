@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 
-const usePosition = () => {
+const usePosition = (ref) => {
   const [position, setPosition] = useState({ x: 10, y: 10 });
   useEffect(() => {
-    const setFromEvent = e => {  if(e.pageY > 266 && e.pageY < 536 && e.pageX > 370 && e.pageX < 470) setPosition({ x: e.pageX, y: e.pageY })};
-    window.addEventListener("mousemove", setFromEvent);
+    const setFromEvent = e => { setPosition({ x: e.pageX, y: e.pageY })};
+    ref.current.addEventListener("mousemove", setFromEvent);
     return () => {
-      window.removeEventListener("mousemove", setFromEvent);
+      ref.current.removeEventListener("mousemove", setFromEvent);
     };
   }, []);
 

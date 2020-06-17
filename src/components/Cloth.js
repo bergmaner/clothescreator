@@ -1,11 +1,36 @@
-import React, { useRef } from "react";
-import Draggable from "../components/Draggable";
-import { useRect } from "@reach/rect";
-const Cloth = ({ image, color, type }) => {
+import React, { useRef } from "react"
+import Draggable from "../components/Draggable"
+import { useRect } from "@reach/rect"
+import usePosition from "../hooks/usePosition"
+const Cloth = ({
+  image,
+  color,
+  type,
+  fontSize,
+  outlineWidth,
+  textColor,
+  rotate,
+  outlineColor,
+  text,
+}) => {
   const ref = useRef(null);
-  const rect = useRect(ref);
+  const mousePosition = usePosition(ref);
+  console.log(mousePosition)
   return (
     <div>
+      <Draggable mousePosition={mousePosition}> 
+        {" "}
+        <div
+          style={{
+            color: textColor,
+            fontSize: `${fontSize}px`,
+            textShadow: `-${outlineWidth}px -${outlineWidth}px 0 ${outlineColor}, ${outlineWidth}px -${outlineWidth}px 0 ${outlineColor}, -${outlineWidth}px ${outlineWidth}px 0 ${outlineColor}, ${outlineWidth}px ${outlineWidth}px 0 ${outlineColor}`,
+            transform: `rotate(${rotate}deg)`,
+          }}
+        >
+          {text}
+        </div>
+      </Draggable>
       <div
         style={{
           height: 460,
@@ -15,6 +40,7 @@ const Cloth = ({ image, color, type }) => {
         }}
       >
         <div
+          ref={ref}
           style={{
             zIndex: 100,
             position: "absolute",
