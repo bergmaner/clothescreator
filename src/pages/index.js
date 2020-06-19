@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react"
 import Cloth from "../components/Cloth"
 import Layout from "../components/layout"
 import ColorPicker from "../components/ColorPicker"
-import Draggable from "../components/Draggable"
+import Button from "../components/Button"
+import { AiOutlineCloudUpload } from "react-icons/ai"
+import { MdTextFields } from "react-icons/md"
+import { IoMdColorPalette, IoMdImages } from "react-icons/io"
 const IndexPage = () => {
   const buttonsConfig = [
     { text: "przód", onClick: () => setImage("front.png") },
@@ -21,7 +24,7 @@ const IndexPage = () => {
   const [type, setType] = useState("tshirt")
   const [rotate, setRotate] = useState(0)
   const [text, setText] = useState("")
-  const [color, setColor] = useState({
+  const [colorProduct, setColorProduct] = useState({
     r: "0",
     g: "0",
     b: "0",
@@ -32,86 +35,100 @@ const IndexPage = () => {
   }, [outline])
   return (
     <Layout>
-      {buttonsConfig.map(item => (
-        <button onClick={item.onClick}>{item.text}</button>
-      ))}
+      <div style={{ display: "flex", justifyContent: "center", alignItems:"center"}}>
+    
+        <div>
+          <Button icon={<IoMdColorPalette style={{ fontSize: "50px" }}/>} text="Select theme"/>
+          <Button icon={<MdTextFields style={{ fontSize: "50px" }} />} text="Add a text"/>
+          <Button icon={<IoMdImages style={{ fontSize: "50px" }}/>} text="Add a image"/>
+          <Button icon={<AiOutlineCloudUpload style={{ fontSize: "50px" }}/>} text="upload a image"/>
+        </div>
+        
+        <Cloth
+          color={colorProduct}
+          image={image}
+          type={type}
+          textColor={textColor}
+          fontSize={fontSize}
+          outlineWidth={outlineWidth}
+          rotate={rotate}
+          outlineColor={outlineColor}
+          text={text}
+        />
+        <div>
+          <div>
+            {buttonsConfig.map(item => (
+              <button onClick={item.onClick}>{item.text}</button>
+            ))}
+          </div>
 
-      <div>
-        <select
-          name="type"
-          value={type}
-          onChange={e => setType(e.target.value)}
-        >
-          <option value="tshirt">Koszulka</option>
-          <option value="hoodie">Bluza</option>
-          <option value="sweatshirt">Sweter</option>
-        </select>
-        <ColorPicker
-          text="color"
-          color={color}
-          changeColor={color => setColor(color.rgb)}
-        />
-        <input
-          placeholder="Text on product"
-          type="text"
-          value={text}
-          onChange={e => setText(e.target.value)}
-        />
-        <ColorPicker
-          text="textColor"
-          color={textColor}
-          changeColor={color => setTextColor(color.hex)}
-        />
-        <input
-          placeholder="Font-size"
-          type="number"
-          value={fontSize}
-          onChange={e => setFontSize(e.target.value)}
-        />
-        <div>
-          {" "}
-          <input
-            type="range"
-            id="rotate"
-            name="rotate"
-            onChange={e => setRotate(e.target.value)}
-            min="-180"
-            max="180"
-          />
-          <label style={{ margin: ".4rem" }}>Rotate</label>
-          {rotate}
+          <div>
+            <select
+              name="type"
+              value={type}
+              onChange={e => setType(e.target.value)}
+            >
+              <option value="tshirt">Koszulka</option>
+              <option value="hoodie">Bluza</option>
+              <option value="sweatshirt">Sweter</option>
+            </select>
+            <ColorPicker
+              text="colorProduct"
+              color={colorProduct}
+              changeColor={color => setColorProduct(color.rgb)}
+            />
+            <input
+              placeholder="Text on product"
+              type="text"
+              value={text}
+              onChange={e => setText(e.target.value)}
+            />
+            <ColorPicker
+              text="textColor"
+              color={textColor}
+              changeColor={color => setTextColor(color.hex)}
+            />
+            <input
+              placeholder="Font-size"
+              type="number"
+              value={fontSize}
+              onChange={e => setFontSize(e.target.value)}
+            />
+            <div>
+              {" "}
+              <input
+                type="range"
+                id="rotate"
+                name="rotate"
+                onChange={e => setRotate(e.target.value)}
+                min="-180"
+                max="180"
+              />
+              <label style={{ margin: ".4rem" }}>Rotate</label>
+              {rotate}
+            </div>
+            <div>
+              {" "}
+              <input
+                type="checkbox"
+                value={outline}
+                onChange={() => setOutline(!outline)}
+                id="outline"
+                name="outline"
+              />
+              <label style={{ margin: ".4rem" }} for="outline">
+                Outline
+              </label>
+              <ColorPicker
+                text="outline Color"
+                color={outlineColor}
+                changeColor={color => setOutlineColor(color.hex)}
+              />
+            </div>
+            <input type="file" />
+          </div>
         </div>
-        <div>
-          {" "}
-          <input
-            type="checkbox"
-            value={outline}
-            onChange={() => setOutline(!outline)}
-            id="outline"
-            name="outline"
-          />
-          <label style={{ margin: ".4rem" }} for="outline">
-            Outline
-          </label>
-          <ColorPicker
-            text="outline Color"
-            color={outlineColor}
-            changeColor={color => setOutlineColor(color.hex)}
-          />
-        </div>
-        <input type="file" />
       </div>
-      <Cloth
-        color={color}
-        image={image}
-        type={type}
-        textColor={textColor}
-        fontSize={fontSize}
-        outlineWidth={outlineWidth}
-        rotate={rotate}
-        outlineColor={outlineColor}
-        text={text}
-      />
     </Layout>
   )
 }

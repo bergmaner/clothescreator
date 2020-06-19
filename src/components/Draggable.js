@@ -1,7 +1,8 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useRef, useMemo, useEffect } from "react";
 const Draggable = ({ children,mousePosition }) => {
   const [dragging, setDragging] = useState(false);
-  const [elementPosition, setElementPosition] = useState({ x: 420, y: 580 });
+  const ref = useRef();
+  const [elementPosition, setElementPosition] = useState({ x: 0, y: 0 });
   const handleMouseDown = () => {
     setDragging(true)
   }
@@ -17,11 +18,11 @@ const Draggable = ({ children,mousePosition }) => {
     } else {
       window.removeEventListener("mouseup", handleMouseUp)
     }
-  }, [dragging, handleMouseUp])
+  }, [dragging, handleMouseUp, handleMouseDown])
 
   const styles = useMemo(
     () => ({
-      cursor: dragging ? "-webkit-grabbing" : "-webkit-grab",
+      cursor: "-webkit-grab" ,
       // transition: dragging ? 'none' : 'transform 500ms',
       position: "absolute",
       left: dragging ? `${mousePosition.x}px` : `${elementPosition.x}px`,
@@ -31,9 +32,8 @@ const Draggable = ({ children,mousePosition }) => {
     }),
     [dragging, mousePosition]
   )
-
   return (
-    <div className="draggable" style={styles}>
+    <div ref={ref} className="draggable" style={styles}>
       {children}
     </div>
   )

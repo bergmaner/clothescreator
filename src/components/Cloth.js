@@ -14,23 +14,13 @@ const Cloth = ({
   text,
 }) => {
   const ref = useRef(null);
+  const childrenRef = useRef(null);
   const mousePosition = usePosition(ref);
-  console.log(mousePosition)
+  console.log(mousePosition);
+  console.log(childrenRef.current);
+  console.log(ref?.current?.getBoundingClientRect());
   return (
     <div>
-      <Draggable mousePosition={mousePosition}> 
-        {" "}
-        <div
-          style={{
-            color: textColor,
-            fontSize: `${fontSize}px`,
-            textShadow: `-${outlineWidth}px -${outlineWidth}px 0 ${outlineColor}, ${outlineWidth}px -${outlineWidth}px 0 ${outlineColor}, -${outlineWidth}px ${outlineWidth}px 0 ${outlineColor}, ${outlineWidth}px ${outlineWidth}px 0 ${outlineColor}`,
-            transform: `rotate(${rotate}deg)`,
-          }}
-        >
-          {text}
-        </div>
-      </Draggable>
       <div
         style={{
           height: 460,
@@ -50,6 +40,21 @@ const Cloth = ({
             height: "290px",
           }}
         >
+          <div ref={childrenRef}>
+           <Draggable mousePosition={mousePosition}> 
+        {" "}
+        <div
+          style={{
+            color: textColor,
+            fontSize: `${fontSize}px`,
+            textShadow: `-${outlineWidth}px -${outlineWidth}px 0 ${outlineColor}, ${outlineWidth}px -${outlineWidth}px 0 ${outlineColor}, -${outlineWidth}px ${outlineWidth}px 0 ${outlineColor}, ${outlineWidth}px ${outlineWidth}px 0 ${outlineColor}`,
+            transform: `rotate(${rotate}deg)`,
+          }}
+        >
+          {text}
+        </div>
+      </Draggable>
+      </div>
           {" "}
         </div>
         <img
