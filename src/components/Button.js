@@ -2,6 +2,7 @@ import React from "react"
 import styled from "styled-components"
 const CoreButton = styled.div`
   width: 240px;
+  margin:10px 0px;
 `
 const ButtonLink = styled.div`
   border: 2px solid black;
@@ -20,12 +21,12 @@ const ButtonLink = styled.div`
   text-transform: uppercase;
   overflow: hidden;
   letter-spacing: 0.08em;
-  border-radius: 5px;
+  border-radius: 15px;
   text-shadow: 0 0 1px rgba(0, 0, 0, 0.2), 0 1px 0 rgba(0, 0, 0, 0.2);
-  -webkit-transition: all 1s ease;
-  -moz-transition: all 1s ease;
-  -o-transition: all 1s ease;
-  transition: all 1s ease;
+  -webkit-transition: all 0.75s ease;
+  -moz-transition: all 0.75s ease;
+  -o-transition: all 0.75s ease;
+  transition: all 0.75s ease;
   :after {
     content: "";
     position: absolute;
@@ -34,10 +35,10 @@ const ButtonLink = styled.div`
     top: 50%;
     width: 150%;
     z-index: -1;
-    -webkit-transition: all 0.75s ease 0s;
-    -moz-transition: all 0.75s ease 0s;
-    -o-transition: all 0.75s ease 0s;
-    transition: all 0.75s ease 0s;
+    -webkit-transition: all 0.5s ease 0s;
+    -moz-transition: all 0.5s ease 0s;
+    -o-transition: all 0.5s ease 0s;
+    transition: all 0.5s ease 0s;
     background: black;
     -moz-transform: translateX(-50%) translateY(-50%) rotate(-25deg);
     -ms-transform: translateX(-50%) translateY(-50%) rotate(-25deg);
@@ -54,9 +55,9 @@ const ButtonLink = styled.div`
     height: 450%;
   }
 `
-const Button = ({icon, text}) => {
+const Button = ({icon, text, onClick}) => {
   return (
-    <CoreButton>
+    <CoreButton onClick = {onClick}>
       <ButtonLink>{ icon }<div>{text}</div></ButtonLink>
     </CoreButton>
   )

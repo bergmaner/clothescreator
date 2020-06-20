@@ -1,11 +1,8 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import Cloth from "../components/Cloth"
 import Layout from "../components/layout"
 import ColorPicker from "../components/ColorPicker"
-import Button from "../components/Button"
-import { AiOutlineCloudUpload } from "react-icons/ai"
-import { MdTextFields } from "react-icons/md"
-import { IoMdColorPalette, IoMdImages } from "react-icons/io"
+import ButtonsMenu from "../components/ButtonsMenu"
 const IndexPage = () => {
   const buttonsConfig = [
     { text: "przód", onClick: () => setImage("front.png") },
@@ -24,6 +21,9 @@ const IndexPage = () => {
   const [type, setType] = useState("tshirt")
   const [rotate, setRotate] = useState(0)
   const [text, setText] = useState("")
+  
+
+
   const [colorProduct, setColorProduct] = useState({
     r: "0",
     g: "0",
@@ -33,17 +33,18 @@ const IndexPage = () => {
   useEffect(() => {
     outline ? setOutlineWidth(1) : setOutlineWidth(0)
   }, [outline])
+
+  
   return (
     <Layout>
-      <div style={{ display: "flex", justifyContent: "center", alignItems:"center"}}>
-    
-        <div>
-          <Button icon={<IoMdColorPalette style={{ fontSize: "50px" }}/>} text="Select theme"/>
-          <Button icon={<MdTextFields style={{ fontSize: "50px" }} />} text="Add a text"/>
-          <Button icon={<IoMdImages style={{ fontSize: "50px" }}/>} text="Add a image"/>
-          <Button icon={<AiOutlineCloudUpload style={{ fontSize: "50px" }}/>} text="upload a image"/>
-        </div>
-        
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <ButtonsMenu/>
         <Cloth
           color={colorProduct}
           image={image}
@@ -125,7 +126,7 @@ const IndexPage = () => {
                 changeColor={color => setOutlineColor(color.hex)}
               />
             </div>
-            <input type="file" />
+           
           </div>
         </div>
       </div>
