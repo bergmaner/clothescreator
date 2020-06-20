@@ -2,16 +2,19 @@ import React from "react"
 import styled from "styled-components"
 const CoreButton = styled.div`
   width: 240px;
-  margin:10px 0px;
+  margin: 10px 0px;
 `
 const ButtonLink = styled.div`
+  svg {
+    font-size: 50px;
+  }
   border: 2px solid black;
   color: black;
   position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-direction:row-reverse;
+  flex-direction: row-reverse;
   margin: 5px auto 0;
   padding: 3px 15px;
   font-size: 14px;
@@ -55,10 +58,13 @@ const ButtonLink = styled.div`
     height: 450%;
   }
 `
-const Button = ({icon, text, onClick}) => {
+const Button = ({ icon, text, onClick }) => {
   return (
-    <CoreButton onClick = {onClick}>
-      <ButtonLink>{ icon }<div>{text}</div></ButtonLink>
+    <CoreButton onClick={onClick}>
+      <ButtonLink>
+        {icon}
+        <div>{text}</div>
+      </ButtonLink>
     </CoreButton>
   )
 }

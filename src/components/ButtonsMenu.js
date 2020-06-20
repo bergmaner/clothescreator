@@ -1,11 +1,32 @@
 import React, { useRef, useState } from "react"
 import ModalBox from "../components/ModalBox"
 import Button from "../components/Button"
+import ColorPicker from "../components/ColorPicker"
 import { AiOutlineCloudUpload } from "react-icons/ai"
 import { MdTextFields } from "react-icons/md"
 import { RiTShirtLine } from "react-icons/ri"
 import { IoMdColorPalette, IoMdImages } from "react-icons/io"
-const ButtonsMenu = () => {
+import styled from "styled-components"
+
+const ProductsContainer = styled.div`
+  display: inline-block;
+  div {
+    display: flex;
+    justify-content: center;
+    text-transform: capitalize;
+  }
+  img {
+    width: 150px;
+    margin: 0px;
+  }
+`
+const Form = styled.div`
+div label{
+ margin: 0.4rem;
+}
+`;
+
+const ButtonsMenu = ({ data, setData }) => {
   const [openProduct, setOpenProduct] = useState(false)
   const [openTheme, setOpenTheme] = useState(false)
   const [openText, setOpenText] = useState(false)
@@ -14,7 +35,11 @@ const ButtonsMenu = () => {
   const inputRef = useRef()
   const fileUploadAction = () => inputRef.current.click()
   const fileUploadInputChange = e => setFile(e.target.value)
-  const products = [{content: "tshirt"}, {content: "hoodie"}, {content: "sweatshirt"}]
+  const products = [
+    { content: "tshirt" },
+    { content: "hoodie" },
+    { content: "sweatshirt" },
+  ]
   return (
     <div>
       <input
@@ -29,39 +54,19 @@ const ButtonsMenu = () => {
         button={
           <Button
             onClick={() => setOpenProduct(true)}
-            icon={<RiTShirtLine style={{ fontSize: "50px" }} />}
+            icon={<RiTShirtLine />}
             text="Change Product"
           />
         }
       >
         <div>
-        <h2>Change Product</h2>
-        {products.map( (product) => (
-         <div style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            display: "inline-block",
-          }}
-        >
-          <img
-            src={require(`../images/${product.content}/front.png`)}
-            style={{
-              width: "150px",
-              margin: "0px"
-            }}
-          />
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              textTransform: "capitalize",
-            }}
-          >
-            {product.content}
-          </div>
-        </div>
-        ))}
+          <h2>Change Product</h2>
+          {products.map(product => (
+            <ProductsContainer>
+              <img src={require(`../images/${product.content}/front.png`)} />
+              <div>{product.content}</div>
+            </ProductsContainer>
+          ))}
         </div>
       </ModalBox>
 
@@ -71,7 +76,7 @@ const ButtonsMenu = () => {
         button={
           <Button
             onClick={() => setOpenTheme(true)}
-            icon={<IoMdColorPalette style={{ fontSize: "50px" }} />}
+            icon={<IoMdColorPalette />}
             text="Select theme"
           />
         }
@@ -87,24 +92,75 @@ const ButtonsMenu = () => {
         button={
           <Button
             onClick={() => setOpenText(true)}
-            icon={<MdTextFields style={{ fontSize: "50px" }} />}
+            icon={<MdTextFields />}
             text="Add a text"
           />
         }
       >
         <div>
           <h2>Add a text</h2>
-          <div>KOddsokfs</div>
+          <Form>
+            <input
+              placeholder="Text on product"
+              type="text"
+              value={data.text}
+              onChange={e => setData({ ...data, text: e.target.value })}
+            />
+            <ColorPicker
+              text="textColor"
+              color={data.textColor}
+              changeColor={color => setData({ ...data, textColor: color.hex })}
+            />
+            <input
+              placeholder="Font-size"
+              type="number"
+              value={data.fontSize}
+              onChange={e => setData({ ...data, fontSize: e.target.value })}
+            />
+            <div>
+              {" "}
+              <input
+                type="range"
+                id="rotate"
+                name="rotate"
+                onChange={e => setData({ ...data, rotate: e.target.value })}
+                min="-180"
+                max="180"
+              />
+              <label>Rotate</label>
+              {data.rotate}
+            </div>
+            <div>
+              {" "}
+              <input
+                type="checkbox"
+                value={data.outline}
+                onChange={() => setData({ ...data, outline: !data.outline })}
+                id="outline"
+                name="outline"
+              />
+              <label for="outline">
+                Outline
+              </label>
+              <ColorPicker
+                text="outline Color"
+                color={data.outlineColor}
+                changeColor={color =>
+                  setData({ ...data, outlineColor: color.hex })
+                }
+              />
+            </div>
+          </Form>
         </div>
       </ModalBox>
-        
+
       <ModalBox
         handleClose={() => setOpenImages(false)}
         open={openImages}
         button={
           <Button
             onClick={() => setOpenImages(true)}
-            icon={<IoMdImages style={{ fontSize: "50px" }} />}
+            icon={<IoMdImages />}
             text="Add a image"
           />
         }
@@ -117,7 +173,7 @@ const ButtonsMenu = () => {
 
       <Button
         onClick={() => fileUploadAction()}
-        icon={<AiOutlineCloudUpload style={{ fontSize: "50px" }} />}
+        icon={<AiOutlineCloudUpload />}
         text="upload a image"
       />
     </div>
