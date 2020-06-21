@@ -49,9 +49,7 @@ const IndexPage = () => {
     <Layout>
       <Container>
         <ButtonsMenu data = {data} setData = {setDatas}/>
-        <Cloth
-         data={data}
-        />
+        <Cloth data={data}/>
         <div>
           <div>
             {buttonsConfig.map(item => (
@@ -60,15 +58,6 @@ const IndexPage = () => {
           </div>
 
           <div>
-            <select
-              name="type"
-              value={data.type}
-              onChange={e => setData({ ...data, type: e.target.value})}
-            >
-              <option value="tshirt">Koszulka</option>
-              <option value="hoodie">Bluza</option>
-              <option value="sweatshirt">Sweter</option>
-            </select>
             <ColorPicker
               text="colorProduct"
               color={data.colorProduct}

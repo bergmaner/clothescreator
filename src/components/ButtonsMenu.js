@@ -9,15 +9,25 @@ import { IoMdColorPalette, IoMdImages } from "react-icons/io"
 import styled from "styled-components"
 
 const ProductsContainer = styled.div`
-  display: inline-block;
+  display: inline-block; 
   div {
+    cursor:pointer;
+    background: ${props => `rgba(${props.color.r},${props.color.g},${props.color.b},${props.color.a})` };
+    height:150px;
+    width: 150px;
+  }
+  div:hover{
+    filter: brightness(80%);
+  }
+  span {
     display: flex;
     justify-content: center;
     text-transform: capitalize;
   }
   img {
-    width: 150px;
     margin: 0px;
+    width: 150px;
+    height: 150px;
   }
 `
 const Form = styled.div`
@@ -40,6 +50,10 @@ const ButtonsMenu = ({ data, setData }) => {
     { content: "hoodie" },
     { content: "sweatshirt" },
   ]
+  const closeOpenProduct = (value) =>{
+    setData({ ...data, type: value});
+    setOpenProduct(false);
+  }
   return (
     <div>
       <input
@@ -62,9 +76,9 @@ const ButtonsMenu = ({ data, setData }) => {
         <div>
           <h2>Change Product</h2>
           {products.map(product => (
-            <ProductsContainer>
-              <img src={require(`../images/${product.content}/front.png`)} />
-              <div>{product.content}</div>
+            <ProductsContainer color={data.colorProduct}>
+              <div onClick={ () => closeOpenProduct(product.content)}><img src={require(`../images/${product.content}/front.png`)}/></div>
+              <span>{product.content}</span>
             </ProductsContainer>
           ))}
         </div>

@@ -1,14 +1,11 @@
 import React, { useState, useRef, useMemo, useEffect } from "react";
-const Draggable = ({ children,mousePosition }) => {
-  const [dragging, setDragging] = useState(false);
+const Draggable = ({ children,mousePosition,dragging, setDragging }) => {
   const ref = useRef();
-  const [elementPosition, setElementPosition] = useState({ x: 0, y: 0 });
   const handleMouseDown = () => {
     setDragging(true)
   }
   const handleMouseUp = () => {
     setDragging(false);
-    setElementPosition({x:mousePosition.x, y:mousePosition.y })
   }
   useEffect(() => {
     window.addEventListener("mousedown", handleMouseDown)
@@ -25,8 +22,8 @@ const Draggable = ({ children,mousePosition }) => {
       cursor: "-webkit-grab" ,
       // transition: dragging ? 'none' : 'transform 500ms',
       position: "absolute",
-      left: dragging ? `${mousePosition.x}px` : `${elementPosition.x}px`,
-      top: dragging ? `${mousePosition.y}px` : `${elementPosition.y}px`,
+      left: `${mousePosition.x}px`,
+      top: `${mousePosition.y}px`,
       userSelect: "none",
       zIndex: 300,
     }),

@@ -1,4 +1,4 @@
-import React, { useRef } from "react"
+import React, { useRef, useState } from "react"
 import styled from "styled-components"
 import Draggable from "../components/Draggable"
 import usePosition from "../hooks/usePosition"
@@ -7,8 +7,8 @@ const ColorRectangle = styled.div`
   height: 460px;
   width: 460px;
   position: relative;
-  backround-color: ${props =>
-    `rgba(${data.color.r},${data.color.g},${data.color.b},${data.color.a})`};
+  background-color: ${props =>
+    `rgba(${props.color.r},${props.color.g},${props.color.b},${props.color.a})`};
   img {
     user-select: none;
     position: absolute;
@@ -19,8 +19,8 @@ const ColorRectangle = styled.div`
 const DragContainer = styled.div`
   z-index: 100;
   position: absolute;
-  top: 85;
-  left: 155;
+  top: 85px;
+  left: 155px;
   width: 150px;
   height: 290px;
 `
@@ -33,20 +33,25 @@ const Text = styled.div`
 `
 
 const Cloth = ({ data }) => {
+  const [dragging, setDragging] = useState(false);
   const ref = useRef(null)
   const childrenRef = useRef(null)
-  const mousePosition = usePosition(ref)
+  const mousePosition = usePosition(ref,dragging)
+
+  const setDrag = (value) => {
+    setDragging(value);
+  }
   return (
     <div>
       <ColorRectangle color={data.colorProduct}>
         <DragContainer ref={ref}>
           <div ref={childrenRef}>
-            <Draggable mousePosition={mousePosition}>
+            <Draggable mousePosition={mousePosition} dragging={dragging} setDragging={setDrag}>
               {" "}
               <Text data={data}>{data.text}</Text>
             </Draggable>
           </div>{" "}
-        </DragContainer>
+        </DragContainer >
         <img
           draggable="false"
           src={require(`../images/${data.type}/${data.image}`)}

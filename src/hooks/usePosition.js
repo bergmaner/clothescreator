@@ -1,13 +1,21 @@
 import { useEffect, useState } from "react"
 
-const usePosition = ref => {
+const usePosition = (ref, dragging) => {
   const [position, setPosition] = useState({ x: 0, y: 0 })
   useEffect(() => {
     const setFromEvent = e => {
-      if (e.clientX > ref?.current.getBoundingClientRect()?.left && e.clientX < ref?.current.getBoundingClientRect()?.right && e.clientY > ref?.current?.getBoundingClientRect()?.top && e.clientY < ref?.current?.getBoundingClientRect()?.bottom) {
+      console.log(dragging)
+      const element = ref?.current?.getBoundingClientRect()
+      if (
+        dragging &&
+        e.clientX > element?.left &&
+        e.clientX < element?.right &&
+        e.clientY > element?.top &&
+        e.clientY < element?.bottom
+      ) {
         setPosition({
-          x: e.clientX - ref?.current?.getBoundingClientRect()?.left,
-          y: e.clientY - ref?.current?.getBoundingClientRect()?.top,
+          x: e.clientX - element?.left,
+          y: e.clientY - element?.top,
         })
       }
     }
@@ -15,7 +23,7 @@ const usePosition = ref => {
     return () => {
       ref.current.removeEventListener("mousemove", setFromEvent)
     }
-  }, [])
+  }, [dragging])
 
   return position
 }
