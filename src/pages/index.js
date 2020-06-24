@@ -36,7 +36,6 @@ const IndexPage = () => {
     a: "1",
     }
   });
-
   const setDatas = (value) =>{
     setData(value);
   }
@@ -56,7 +55,6 @@ const IndexPage = () => {
               <button onClick={item.onClick}>{item.text}</button>
             ))}
           </div>
-
           <div>
             <ColorPicker
               text="colorProduct"

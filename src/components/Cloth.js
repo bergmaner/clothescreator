@@ -24,7 +24,8 @@ const DragContainer = styled.div`
   width: 150px;
   height: 290px;
 `
-const Text = styled.div`
+const Text = styled.p`
+  margin: 0px;
   color: ${props => props.data.textColor};
   font-size: ${props => `${props.data.fontSize}px`};
   text-shadow: ${props =>
@@ -33,25 +34,30 @@ const Text = styled.div`
 `
 
 const Cloth = ({ data }) => {
-  const [dragging, setDragging] = useState(false);
+  const [dragging, setDragging] = useState(false)
   const ref = useRef(null)
   const childrenRef = useRef(null)
-  const mousePosition = usePosition(ref,dragging)
+  const dragPosition = usePosition(ref, dragging)
 
-  const setDrag = (value) => {
-    setDragging(value);
+  const setDrag = value => {
+    setDragging(value)
   }
   return (
     <div>
       <ColorRectangle color={data.colorProduct}>
         <DragContainer ref={ref}>
-          <div ref={childrenRef}>
-            <Draggable mousePosition={mousePosition} dragging={dragging} setDragging={setDrag}>
-              {" "}
-              <Text data={data}>{data.text}</Text>
-            </Draggable>
-          </div>{" "}
-        </DragContainer >
+          <Draggable
+            childrenRef={childrenRef}
+            dragPosition={dragPosition}
+            dragging={dragging}
+            setDragging={setDrag}
+          >
+            {" "}
+            <Text ref={childrenRef} data={data}>
+              {data.text}
+            </Text>
+          </Draggable>
+        </DragContainer>
         <img
           draggable="false"
           src={require(`../images/${data.type}/${data.image}`)}

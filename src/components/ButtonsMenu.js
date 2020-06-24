@@ -10,16 +10,17 @@ import styled from "styled-components"
 
 const ProductsContainer = styled.div`
   display: inline-block; 
+  background: ${props => `rgba(${props.color.r},${props.color.g},${props.color.b},${props.color.a})` };
+  :hover{
+    filter: brightness(90%);
+  }
   div {
     cursor:pointer;
-    background: ${props => `rgba(${props.color.r},${props.color.g},${props.color.b},${props.color.a})` };
-    height:150px;
+    height:149px;
     width: 150px;
   }
-  div:hover{
-    filter: brightness(80%);
-  }
   span {
+    background: #fff;
     display: flex;
     justify-content: center;
     text-transform: capitalize;

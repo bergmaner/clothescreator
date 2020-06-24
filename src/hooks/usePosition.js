@@ -4,7 +4,6 @@ const usePosition = (ref, dragging) => {
   const [position, setPosition] = useState({ x: 0, y: 0 })
   useEffect(() => {
     const setFromEvent = e => {
-      console.log(dragging)
       const element = ref?.current?.getBoundingClientRect()
       if (
         dragging &&
