@@ -24,8 +24,11 @@ const DragContainer = styled.div`
   width: 150px;
   height: 290px;
 `
-const Text = styled.p`
+const Text = styled.input`
   margin: 0px;
+  background: transparent;
+  outline: none;
+  border: none;
   color: ${props => props.data.textColor};
   font-size: ${props => `${props.data.fontSize}px`};
   text-shadow: ${props =>
@@ -33,7 +36,7 @@ const Text = styled.p`
   transform: ${props => `rotate(${props.data.rotate}deg)`};
 `
 
-const Cloth = ({ data }) => {
+const Cloth = ({ data, setData }) => {
   const [dragging, setDragging] = useState(false)
   const ref = useRef(null)
   const childrenRef = useRef(null)
@@ -53,9 +56,7 @@ const Cloth = ({ data }) => {
             setDragging={setDrag}
           >
             {" "}
-            <Text ref={childrenRef} data={data}>
-              {data.text}
-            </Text>
+          <Text onChange = {(e)=>setData({ ...data, text: e.target.value  })} value = {data.text} ref={childrenRef} data={data}/>
           </Draggable>
         </DragContainer>
         <img

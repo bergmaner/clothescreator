@@ -4,7 +4,7 @@ import { IoMdResize, IoMdClose } from "react-icons/io"
 import styled from "styled-components"
 
 const DragElement = styled.div`
-p{
+input{
   width: ${props => `${props.dimensions.width + props.mousePosition.x}px`};
   height: ${props => `${props.dimensions.height + props.mousePosition.y}px`};
   font-size: ${props => `${props.dimensions.height + props.mousePosition.y}px`};
