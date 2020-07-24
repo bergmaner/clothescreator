@@ -60,7 +60,7 @@ const Cloth = ({ data, setData }) => {
         </DragContainer>
         <img
           draggable="false"
-          src={require(`../images/${data.type}/${data.image}`)}
+          src={require(`../assets/images/${data.type}/${data.image}`)}
         />
       </ColorRectangle>
     </div>

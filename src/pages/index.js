@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef } from "react"
+import React, { useState, useEffect } from "react"
 import Cloth from "../components/Cloth"
 import ColorPicker from "../components/ColorPicker"
 import ButtonsMenu from "../components/ButtonsMenu"
 import styled from "styled-components"
 import Navbar from "../components/Navbar"
+import { buttonsConfig, initialData } from "../helpers/config"
 
 const Container = styled.div`
   height: calc(100vh - 72px);
@@ -50,31 +51,8 @@ const Gallery = styled.div`
 `;
 
 const IndexPage = () => {
-  const buttonsConfig = [
-    { text: "front", onClick: () => setData({ ...data, image: "front.png" }) },
-    { text: "back", onClick: () => setData({ ...data, image: "back.png" }) },
-    { text: "left", onClick: () => setData({ ...data, image: "left.png" }) },
-    { text: "right", onClick: () => setData({ ...data, image: "right.png" }) },
-  ]
-  const [data, setData] = useState({
-    image: "front.png",
-    sticker: "",
-    fontSize: 16,
-    textColor: "#000",
-    outlineWidth: 0,
-    outline: false,
-    outlineColor: "#000",
-    fontFamily: "Arial",
-    type: "tshirt",
-    rotate: 0,
-    text: "",
-    colorProduct: {
-      r: "0",
-      g: "0",
-      b: "0",
-      a: "1",
-    },
-  })
+  
+  const [data, setData] = useState(initialData)
   const setDatas = value => {
     setData(value)
   }
@@ -93,10 +71,10 @@ const IndexPage = () => {
         <div>
           <Gallery>
             {buttonsConfig.map(item => (
-              <ColorRectangle background={data.colorProduct} onClick={item.onClick}>
+              <ColorRectangle background={data.colorProduct} onClick={ () => setData({ ...data, image: item.path})}>
                 <TextContainer><Text>{data.text}</Text></TextContainer>
                 <Image
-                  src={require(`../images/${data.type}/${item.text}.png`)}
+                  src={require(`../assets/images/${data.type}/${item.text}.png`)}
                 />
               </ColorRectangle>
             ))}

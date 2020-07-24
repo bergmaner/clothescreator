@@ -6,6 +6,7 @@ import { AiOutlineCloudUpload } from "react-icons/ai"
 import { MdTextFields } from "react-icons/md"
 import { RiTShirtLine } from "react-icons/ri"
 import { IoMdColorPalette, IoMdImages } from "react-icons/io"
+import { products } from "../helpers/config";
 import styled from "styled-components"
 
 const ProductsContainer = styled.div`
@@ -46,11 +47,7 @@ const ButtonsMenu = ({ data, setData }) => {
   const inputRef = useRef()
   const fileUploadAction = () => inputRef.current.click()
   const fileUploadInputChange = e => setFile(e.target.value)
-  const products = [
-    { content: "tshirt" },
-    { content: "hoodie" },
-    { content: "sweatshirt" },
-  ]
+
   const closeOpenProduct = (value) =>{
     setData({ ...data, type: value});
     setOpenProduct(false);
@@ -78,7 +75,7 @@ const ButtonsMenu = ({ data, setData }) => {
           <h2>Change Product</h2>
           {products.map(product => (
             <ProductsContainer color={data.colorProduct}>
-              <div onClick={ () => closeOpenProduct(product.content)}><img src={require(`../images/${product.content}/front.png`)}/></div>
+              <div onClick={ () => closeOpenProduct(product.content)}><img src={require(`../assets/images/${product.content}/front.png`)}/></div>
               <span>{product.content}</span>
             </ProductsContainer>
           ))}
