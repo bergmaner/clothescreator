@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
 
-const usePosition = (ref, dragging) => {
-  const [position, setPosition] = useState({ x: 0, y: 0 })
+const usePosition = (ref) => {
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [dragging, setDragging] = useState(false);
   useEffect(() => {
     const setFromEvent = e => {
       const element = ref?.current?.getBoundingClientRect()
@@ -24,6 +25,6 @@ const usePosition = (ref, dragging) => {
     }
   }, [dragging])
 
-  return position
+  return {dragging, setDragging, position}
 }
 export default usePosition

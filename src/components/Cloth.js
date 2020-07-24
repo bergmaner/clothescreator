@@ -37,10 +37,9 @@ const Text = styled.input`
 `
 
 const Cloth = ({ data, setData }) => {
-  const [dragging, setDragging] = useState(false)
   const ref = useRef(null)
   const childrenRef = useRef(null)
-  const dragPosition = usePosition(ref, dragging)
+  const { dragging, setDragging, position } = usePosition(ref)
 
   const setDrag = value => {
     setDragging(value)
@@ -51,7 +50,7 @@ const Cloth = ({ data, setData }) => {
         <DragContainer ref={ref}>
           <Draggable
             childrenRef={childrenRef}
-            dragPosition={dragPosition}
+            dragPosition={position}
             dragging={dragging}
             setDragging={setDrag}
           >

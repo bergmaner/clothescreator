@@ -37,12 +37,16 @@ top: 4px;
 `;
 
 const ColorRectangle = styled.div`
-width: 50px;
-height: 50px;
+width: 75px; 
+height: 75px;
 position: relative;
 background-color: ${props =>
   `rgba(${props.background.r},${props.background.g},${props.background.b},${props.background.a})`};
 margin: 5px;
+`;
+
+const Gallery = styled.div`
+
 `;
 
 const IndexPage = () => {
@@ -87,7 +91,7 @@ const IndexPage = () => {
         <ButtonsMenu data={data} setData={setDatas} />
         <Cloth data={data} setData={setDatas} />
         <div>
-          <div>
+          <Gallery>
             {buttonsConfig.map(item => (
               <ColorRectangle background={data.colorProduct} onClick={item.onClick}>
                 <TextContainer><Text>{data.text}</Text></TextContainer>
@@ -96,7 +100,7 @@ const IndexPage = () => {
                 />
               </ColorRectangle>
             ))}
-          </div>
+          </Gallery>
           <div>
             <ColorPicker
               text="colorProduct"

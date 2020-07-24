@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
 
-const useMousePosition = (resize,resizeRef) => {
+const useMousePosition = (resizeRef) => {
   const [position, setPosition] = useState({ x: 0, y: 0 })
+  const [resize, setResize] = useState(false);
   const [clickSpace, setClickSpace] = useState({ x: 0, y: 0 })
   useEffect(() => {
     const setFromEvent = (e) => {
@@ -19,6 +20,6 @@ const useMousePosition = (resize,resizeRef) => {
       window.removeEventListener("mousemove", setFromEvent)
     }
   }, [resize])
-  return position
+  return {position, resize, setResize}
 }
 export default useMousePosition

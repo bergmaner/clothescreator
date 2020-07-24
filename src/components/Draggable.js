@@ -54,10 +54,9 @@ const Draggable = ({
   childrenRef,
 }) => {
   const [active, setActive] = useState(false)
-  const [resize, setResize] = useState(false)
   const settingsRef = useRef()
   const resizeRef = useRef()
-  const mousePosition = useMousePosition(resize, resizeRef,settingsRef)
+  const {position, resize, setResize} = useMousePosition( resizeRef,settingsRef)
   const [elementDimensions, setElementDimensions] = useState({
     width: 37.25,
     height: 19,
@@ -110,7 +109,7 @@ const Draggable = ({
   )
   return (
     <DragElement
-      mousePosition={mousePosition}
+      mousePosition={position}
       dimensions={elementDimensions}
       ref={settingsRef}
       style={dragStyles}
